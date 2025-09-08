@@ -32,6 +32,19 @@ OrderID
 11039
 11040
 
+
+For question 5) i used claude to help with the subqueries, originally i used joins by doing: sqlite> SELECT ContactName                                                                 ...> FROM Customers
+   ...> INNER JOIN Orders ON Orders.CustomerID = Customers.CustomerID
+   ...> WHERE (SELECT COUNT(OrderID) FROM Orders WHERE CustomerID = Customers.CustomerID) = 31;
+ContactName
+Jose Pavarotti
+Jose Pavarotti
+
+
+which worked but not efficiently as it repeated the name
+
+this solution works better in my opinion : 
+
 5)select ContactName from Customers where ( 
 (x1...> select count(OrderID) from Orders where CustomerID=Customers.CustomerID) 
    ...> =
