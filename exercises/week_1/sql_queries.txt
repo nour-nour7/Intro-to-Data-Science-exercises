@@ -1,0 +1,59 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\csgray\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 1) 
+\f1\fs22 \cf2 \CocoaLigature0 select FirstName,LastName,HireDate from Employees where HireDate>'1994-01-01'\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+   ...> ;\
+FirstName|LastName|HireDate\
+Robert|King|1994-01-02\
+Laura|Callahan|1994-03-05\
+Anne|Dodsworth|1994-11-15\
+\
+\
+2) 
+\fs26 sqlite> select count(OrderID),CustomerID from Orders group by CustomerID;\
+count(OrderID)|CustomerID\
+6|ALFKI\
+4|ANATR\
+7|ANTON\
+13|AROUT\
+18|BERGS\
+7|BLAUS\
+11|BLONP\
+3|BOLID\
+17|BONAP\
+\
+3)\
+sqlite> select Customers.ContactName from Products \
+   ...> inner join OrderDetails on Products.ProductID = OrderDetails.ProductID\
+   ...> inner join Orders on OrderDetails.OrderID= Orders.OrderID\
+   ...> inner join Customers on Orders.CustomerID=Customers.CustomerID\
+   ...> \
+   ...> where Products.ProductName like "Chai" ;\
+ContactName\
+Horst Kloss\
+Paula Wilson\
+Fran Wilson\
+Rita M\'fcller\
+Guillermo Fern\'e1ndez\
+\
+\
+\
+4)sqlite> select OrderID from Orders where ShippedDate is null;\
+OrderID\
+11008\
+11019\
+11039\
+\
+5)sqlite> select ContactName from Customers where ( \
+(x1...> select count(OrderID) from Orders where CustomerID=Customers.CustomerID) \
+   ...> =\
+   ...> (select max(orders) from \
+(x1...> (select count(OrderID) as orders from Orders group by CustomerID));\
+ContactName\
+Jose Pavarotti}
